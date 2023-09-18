@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "a6d1a052-5f94-4b58-9769-7eff5a1ca76d",
+		"name": "Automatizacion_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Perfil",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()\r",
+							"\r",
+							"pm.collectionVariables.set('perfilID', jsonData.data.id)\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre_usuario\": \"Camilo\",\r\n    \"telefono\": \"3224567898\",\r\n    \"nombre_mascota\": \"Tommy 1\",\r\n    \"descripcion\": \"Prueba 3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://vetemovil.000webhostapp.com/perfil/registrar",
+					"protocol": "https",
+					"host": [
+						"vetemovil",
+						"000webhostapp",
+						"com"
+					],
+					"path": [
+						"perfil",
+						"registrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Mascota",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const jsonData = pm.response.json()\r",
+							"\r",
+							"pm.collectionVariables.set('mascotaID', jsonData.data.id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Tommy\",\r\n    \"raza\": \"Criollo\",\r\n    \"peso\": \"30\",\r\n    \"id_dueño\": {{perfilID}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://vetemovil.000webhostapp.com/mascotas/registrar",
+					"protocol": "https",
+					"host": [
+						"vetemovil",
+						"000webhostapp",
+						"com"
+					],
+					"path": [
+						"mascotas",
+						"registrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Mascota",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://vetemovil.000webhostapp.com/mascotas/consultar/{{mascotaID}}",
+					"protocol": "https",
+					"host": [
+						"vetemovil",
+						"000webhostapp",
+						"com"
+					],
+					"path": [
+						"mascotas",
+						"consultar",
+						"{{mascotaID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Todas Las Mascotas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://vetemovil.000webhostapp.com/mascotas/consultarAll",
+					"protocol": "https",
+					"host": [
+						"vetemovil",
+						"000webhostapp",
+						"com"
+					],
+					"path": [
+						"mascotas",
+						"consultarAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una Mascota",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://vetemovil.000webhostapp.com/mascotas/eliminar/{{mascotaID}}",
+					"protocol": "https",
+					"host": [
+						"vetemovil",
+						"000webhostapp",
+						"com"
+					],
+					"path": [
+						"mascotas",
+						"eliminar",
+						"{{mascotaID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "perfilID",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "mascotaID",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
